@@ -16,7 +16,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 
 ![Add Tasks](/screenshots/Lab26/addTask.jpg)
 
-![All Tasks](/screenshots/Lab26/allTask.jpg)
+![All Tasks](/screenshots/Lab26/allTAsk.jpg)
 
 
 
