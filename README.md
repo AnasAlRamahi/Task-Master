@@ -29,6 +29,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 </div>
 </div>
 
+![Username](/screenshots/Lab27/Username.jpg)
 
 ## Lab27
 The application should include those 3 activities:
