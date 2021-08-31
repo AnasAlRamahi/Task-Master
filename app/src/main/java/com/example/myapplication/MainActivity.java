@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toLeft = new Intent(MainActivity.this, TaskDetailPage.class);
-                Button leftButton = findViewById(R.id.leftButton); // we can define a button and get the text from it or we can get the text directly from the button namzzz
+                Button leftButton = findViewById(R.id.leftButton); // we can define a button and get the text from it or we can get the text directly from the button id in the layout
                 String taskName = leftButton.getText().toString();
                 toLeft.putExtra("taskName", taskName);
                 startActivity(toLeft);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toRight = new Intent(MainActivity.this, TaskDetailPage.class);
-                String taskName = leftButton.getText().toString();
+                String taskName = rightButton.getText().toString();
                 toRight.putExtra("taskName", taskName);
                 startActivity(toRight);
             }
