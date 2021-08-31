@@ -14,7 +14,7 @@ public class AddTasks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
 
-        Button addTaskButton = findViewById(R.id.addTaskButton);
+        Button addTaskButton = findViewById(R.id.leftButton);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
