@@ -11,16 +11,69 @@ On the “Add a Task” page, allow users to type in details about a new task, s
 + **All Tasks**
 The all tasks page should just be an image with a back button; it needs no functionality.
 
+<div style="width;100%; display: flex; justify-content: center;">
+<div style="width: 30%; margin-right: 3%;">
 
 ![Main Tasks](/screenshots/Lab26/mainTask.jpg)
 
+</div>
+<div style="width: 30%; margin-right: 3%;">
+
 ![Add Tasks](/screenshots/Lab26/addTask.jpg)
+
+</div>
+<div style="width: 30%;">
 
 ![All Tasks](/screenshots/Lab26/allTAsk.jpg)
 
+</div>
+</div>
 
 
 ## Lab27
+The application should include those 3 activities:
 
++ **Task Detail Page**
+Create a Task Detail page. It should have a title at the top of the page, and a Lorem Ipsum description.
 
++ **Settings Page**
+Create a Settings page. It should allow users to enter their username and hit save.
+
++ **Homepage**
+The main page should be modified to contain three different buttons with hardcoded task titles. When a user taps one of the titles, it should go to the Task Detail page, and the title at the top of the page should match the task title that was tapped on the previous page.
+
+The homepage should also contain a button to visit the Settings page, and once the user has entered their username, it should display “{username}’s tasks” above the three task buttons.
+
+<div style="width;100%; display: flex; justify-content: center;">
+<div style="width: 30%; margin-right: 3%;">
+
+![Main Page](/screenshots/Lab27/HomePage.jpg)
+
+</div>
+<div style="width: 30%; margin-right: 3%;">
+
+![Username](/screenshots/Lab27/Username.jpg)
+
+</div>
+</div>
+
+<div style="width;100%; display: flex; justify-content: center;">
+
+<div style="width: 30%; margin-right: 3%;">
+
+![Left Task](/screenshots/Lab27/LeftTask.jpg)
+
+</div>
+<br />
+<div style="width: 30%; margin-right: 3%;">
+
+![Middle Task](/screenshots/Lab27/MiddleTask.jpg)
+
+</div>
+<div style="width: 30%; margin-right: 3%;">
+
+![Right Task](/screenshots/Lab27/RightTask.jpg)
+
+</div>
+</div>
 
