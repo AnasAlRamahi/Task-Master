@@ -99,3 +99,40 @@ The homepage should also contain a button to visit the Settings page, and once t
 </div>
 </div>
 
+
+## Lab29
+The application should include those 4 activities:
+
++ **Homepage**
+The main page should be modified to contain a rendered list of tasks (title and state) inside a recycler view which are retrieved from the Room database. When a user taps one of the titles, it should go to the Task Detail page, which desplays the task title, state and body. Also it has a button to navigate to the AddTask activity.
+
++ **AddTask**
+In this activity you can add a new task my adding it's title, body and state in the input fields, and click submit. The data will be stored inside the Room database.
+
++ **Task Detail Page**
+Create a Task Detail page. It should have a title at the top of the page, with the state beside it, and the body underneath.
+
++ **Settings Page**
+Create a Settings page. It should allow users to enter their username and hit save.
+
+The homepage should also contain a button to visit the Settings page, and once the user has entered their username, it should display “{username}’s tasks” above the three task buttons.
+
+<div style="width;100%; display: flex; justify-content: center;">
+
+<div style="width: 20%; margin-right: 3%;">
+
+![Home](/screenshots/Lab29/HomeActivity.jpg)
+
+</div>
+<br />
+<div style="width: 20%; margin-right: 3%;">
+
+![Add](/screenshots/Lab29/AddTaskActivity.jpg)
+
+</div>
+<div style="width: 20%; margin-right: 3%;">
+
+![Details](/screenshots/Lab29/TaskDetailsActivity.jpg)
+
+</div>
+</div>

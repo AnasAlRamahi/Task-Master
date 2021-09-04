@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(view.getContext(), TaskDetailPage.class);
+                intent.putExtra("title",task.title);
+                intent.putExtra("body",task.body);
+                intent.putExtra("state",task.state);
+                view.getContext().startActivity(intent);
+            });
         }
     }
 
@@ -41,6 +49,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.task = taskItems.get(position);
         TextView taskTitle = holder.itemView.findViewById(R.id.taskTitleViewFragment);
         taskTitle.setText(holder.task.title);
+        TextView taskState = holder.itemView.findViewById(R.id.taskStateViewFragment);
+        taskState.setText(holder.task.state);
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent toSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(toSettings);
             }
+        });
+
+        Button addTaskButton = findViewById(R.id.addTaskButton);
+        addTaskButton.setOnClickListener(view -> {
+            Intent toAddTask = new Intent(MainActivity.this, AddTasks.class);
+            startActivity(toAddTask);
         });
 
 //        Button leftButton = findViewById(R.id.leftButton);
@@ -68,14 +75,15 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        List<Task> TaskItems = new ArrayList<Task>();
-        TaskItems.add(new Task("FIRST"));
-        TaskItems.add(new Task("SECOND"));
-        TaskItems.add(new Task("THIRD"));
-        TaskItems.add(new Task("FOURTH"));
+
+        TaskDatabase db = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "TaskDB").allowMainThreadQueries().build();
+        TaskDao taskDao = db.taskDao();
+
+        List<Task> TaskItems = taskDao.getAll();
+
 
         RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
-        tasksRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         tasksRecyclerView.setAdapter(new TaskAdapter(TaskItems));
 
     }
