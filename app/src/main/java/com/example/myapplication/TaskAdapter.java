@@ -51,15 +51,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         taskTitle.setText(holder.task.title);
         TextView taskState = holder.itemView.findViewById(R.id.taskStateViewFragment);
         taskState.setText(holder.task.state);
-
     }
 
     @Override
     public int getItemCount() {
         return taskItems.size();
     }
-
-
-
 
 }
