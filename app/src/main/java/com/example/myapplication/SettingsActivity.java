@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -23,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(backToMainIntent);
         });
 
-        Button saveButton = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButtonFromSettings);
         saveButton.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
             SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();

@@ -1,6 +1,6 @@
 # Task-Master
 
-## Lab26
+## **Lab26**
 The application should include those 3 activities:
 + **Homepage**
 The main page should be built out to match the wireframe. In particular, it should have a heading at the top of the page, an image to mock the “my tasks” view, and buttons at the bottom of the page to allow going to the “add tasks” and “all tasks” page.
@@ -30,7 +30,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 </div>
 
 
-## Lab27
+## **Lab27**
 The application should include those 3 activities:
 
 + **Task Detail Page**
@@ -77,7 +77,7 @@ The homepage should also contain a button to visit the Settings page, and once t
 </div>
 </div>
 
-## Lab28
+## **Lab28**
 The application should include those 3 activities:
 
 + **Homepage**
@@ -94,13 +94,13 @@ The homepage should also contain a button to visit the Settings page, and once t
 <div style="width;100%; display: flex; justify-content: center;">
 <div style="width: 20%; margin-right: 3%;">
 
-![Main Page](/screenshots/Lab28/RecyclerViewSceenshot.jpg)
+![Main Page](/screenshots/Lab28/RecyclerViewScreenshotgit.jpg)
 
 </div>
 </div>
 
 
-## Lab29
+## **Lab29**
 The application should include those 4 activities:
 
 + **Homepage**
@@ -136,3 +136,29 @@ The homepage should also contain a button to visit the Settings page, and once t
 
 </div>
 </div>
+
+## **Lab30**
+The application should include the same activities as the last lab, but it also includes UI tests from Espresso library that are working fine.
+
+<div style="width;100%; display: flex; justify-content: center;">
+
+<div style="width: 20%; margin-right: 3%;">
+
+![Home](/screenshots/Lab29/HomeActivity.jpg)
+
+</div>
+<br />
+<div style="width: 20%; margin-right: 3%;">
+
+![Add](/screenshots/Lab29/AddTaskActivity.jpg)
+
+</div>
+<div style="width: 20%; margin-right: 3%;">
+
+![Details](/screenshots/Lab29/TaskDetailsActivity.jpg)
+
+</div>
+</div>
+
+![UITestsWorking](screenshots/Lab30/EspressoTestWorked.PNG)
+
