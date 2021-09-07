@@ -13,14 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    List<Task> taskItems = new ArrayList<Task>();
+    List<com.amplifyframework.datastore.generated.model.Task> taskItems = new ArrayList<>();
 
-    public TaskAdapter(List<Task> taskItems) {
+    public TaskAdapter(List<com.amplifyframework.datastore.generated.model.Task> taskItems) {
         this.taskItems = taskItems;
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
-        public Task task;
+        public com.amplifyframework.datastore.generated.model.Task task;
         View itemView;
 
         public TaskViewHolder(@NonNull View itemView) {
@@ -28,9 +28,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             this.itemView = itemView;
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(view.getContext(), TaskDetailPage.class);
-                intent.putExtra("title",task.title);
-                intent.putExtra("body",task.body);
-                intent.putExtra("state",task.state);
+                intent.putExtra("title",task.getTitle());
+                intent.putExtra("body",task.getDescription());
+                intent.putExtra("state",task.getStatus());
                 view.getContext().startActivity(intent);
             });
         }
@@ -48,9 +48,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder holder, int position) {
         holder.task = taskItems.get(position);
         TextView taskTitle = holder.itemView.findViewById(R.id.taskTitleViewFragment);
-        taskTitle.setText(holder.task.title);
+        taskTitle.setText(holder.task.getTitle());
         TextView taskState = holder.itemView.findViewById(R.id.taskStateViewFragment);
-        taskState.setText(holder.task.state);
+        taskState.setText(holder.task.getStatus());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,9 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 
 import java.util.ArrayList;
@@ -25,10 +30,22 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    List<com.amplifyframework.datastore.generated.model.Task> TaskItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
+        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                tasksRecyclerView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
 
         try {
             // Add these lines to add the AWSApiPlugin plugins
@@ -39,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.Task.class),
+                response -> {
+                    for (com.amplifyframework.datastore.generated.model.Task item : response.getData()) {
+                        Log.i("MyAmplifyApp", item.getTitle());
+
+                        TaskItems.add(item);
+                    }
+                    handler.sendEmptyMessage(1);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
 
         Button settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -90,17 +121,23 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+//        TaskDatabase db = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "TaskDB").allowMainThreadQueries().build();
+//        TaskDao taskDao = db.taskDao();
 
-        TaskDatabase db = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "TaskDB").allowMainThreadQueries().build();
-        TaskDao taskDao = db.taskDao();
+//        List<Task> TaskItems = taskDao.getAll();
 
-        List<Task> TaskItems = taskDao.getAll();
+//        RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
+//        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        tasksRecyclerView.setAdapter(new TaskAdapter(TaskItems));
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         tasksRecyclerView.setAdapter(new TaskAdapter(TaskItems));
-
     }
 
     @Override
