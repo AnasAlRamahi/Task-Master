@@ -23,6 +23,9 @@ import android.widget.TextView;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 
 import java.util.ArrayList;
@@ -50,12 +53,57 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+
+        Button login = findViewById(R.id.loginButton);
+        // do your thang
+        login.setOnClickListener(view -> {
+            Amplify.Auth.signInWithWebUI(
+                    this,
+                    result -> Log.i("AuthQuickStart", result.toString()),
+                    error -> Log.e("AuthQuickStart", error.toString())
+            );
+        });
+
+
+        Button signout = findViewById(R.id.signoutButton);
+        signout.setOnClickListener(view -> {
+            Amplify.Auth.signOut(
+                    () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+        });
+
+        TextView usernameView = findViewById(R.id.usernameView);
+//        if(Amplify.Auth.equals(null)){
+////            usernameView.setText("Login Please...");
+//                        usernameView.setText("Welcome, " + Amplify.Auth.getCurrentUser().getUsername());
+//
+//        } else {
+//            usernameView.setText("Welcome, " + Amplify.Auth.getCurrentUser().getUsername());
+//        }
+
+//        AuthSignUpOptions options = AuthSignUpOptions.builder()
+//                .userAttribute(AuthUserAttributeKey.email(), "shero2ram@gmail.com")
+//                .build();
+//        Amplify.Auth.signUp("anas", "Password123", options,
+//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
+//        );
+
+//        Amplify.Auth.confirmSignUp(
+//                "anas",
+//                "937466",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
 
 
         Amplify.API.query(
@@ -144,10 +192,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        String usernameMessage = "\'s Tasks";
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String username = sharedPreferences.getString("username", "Username");
-        TextView usernameField = findViewById(R.id.usernameView);
-        usernameField.setText(username + usernameMessage);
+//        String usernameMessage = "\'s Tasks";
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+//        String username = sharedPreferences.getString("username", "Username");
+//        TextView usernameField = findViewById(R.id.usernameView);
+//        usernameField.setText(username + usernameMessage);
     }
 }
