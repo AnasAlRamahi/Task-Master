@@ -65,7 +65,6 @@ public class AddTasks extends AppCompatActivity {
                         .title(title)
                         .description(body)
                         .status("new")
-                        .team(team)
                         .build();
 
                 Amplify.API.mutate(ModelMutation.create(todo),
