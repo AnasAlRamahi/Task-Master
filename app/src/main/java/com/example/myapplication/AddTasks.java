@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Team;
 
 public class AddTasks extends AppCompatActivity {
 
@@ -38,14 +41,31 @@ public class AddTasks extends AppCompatActivity {
                 String title = taskTitle.getText().toString();
                 TextView taskBody = findViewById(R.id.taskBodyEntry);
                 String body = taskBody.getText().toString();
-                TextView taskState = findViewById(R.id.taskStateEntry);
-                String state = taskState.getText().toString();
+                RadioGroup rGroup = findViewById(R.id.teamRadioGroup);
+                int id = rGroup.getCheckedRadioButtonId();
+                RadioButton rButton = findViewById(id);
+                String rButtonContent = rButton.getText().toString();
+
+//                TextView taskState = findViewById(R.id.taskStateEntry);
+//                String state = taskState.getText().toString();
 //                taskDao.insert(new Task(title, body, state));
+
+//                Team team = new Team.Builder()
+//                        .name("Team 3")
+//                        .build();
+
+
+
+//                Amplify.API.mutate(ModelMutation.create(team),
+//                        response -> Log.i("MyAmplifyApp", "Team with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
 
                 com.amplifyframework.datastore.generated.model.Task todo = com.amplifyframework.datastore.generated.model.Task.builder()
                         .title(title)
                         .description(body)
                         .status("new")
+                        .team(team)
                         .build();
 
                 Amplify.API.mutate(ModelMutation.create(todo),
