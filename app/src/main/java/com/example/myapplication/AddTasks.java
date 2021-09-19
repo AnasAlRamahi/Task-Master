@@ -14,10 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class AddTasks extends AppCompatActivity {
+    HashMap<String, Team> teams = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,17 @@ public class AddTasks extends AppCompatActivity {
             Intent toAddTask = new Intent(AddTasks.this, MainActivity.class);
             startActivity(toAddTask);
         });
+
+        Amplify.API.query(
+                ModelQuery.list(Team.class),
+                response -> {
+                    for (Team team : response.getData()) {
+                        Log.i("MyAmplifyApp", team.getName());
+                        teams.put(team.getName(), team);
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
 
         Button addTaskButton = findViewById(R.id.submitTask);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +82,7 @@ public class AddTasks extends AppCompatActivity {
                         .title(title)
                         .description(body)
                         .status("new")
+                        .team(teams.get(rButtonContent))
                         .build();
 
                 Amplify.API.mutate(ModelMutation.create(todo),
