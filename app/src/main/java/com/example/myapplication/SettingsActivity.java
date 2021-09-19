@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -31,7 +33,13 @@ public class SettingsActivity extends AppCompatActivity {
             sharedPreferencesEditor.putString("username", username);
             sharedPreferencesEditor.apply();
 
+            RadioGroup rGroup = findViewById(R.id.teamRadioGroup);
+            int id = rGroup.getCheckedRadioButtonId();
+            RadioButton rButton = findViewById(id);
+            String rButtonContent = rButton.getText().toString();
+
             Intent toMain = new Intent(SettingsActivity.this, MainActivity.class);
+            toMain.putExtra("team", rButtonContent);
             startActivity(toMain);
         });
     }

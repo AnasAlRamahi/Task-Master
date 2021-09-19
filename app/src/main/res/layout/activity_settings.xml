@@ -6,6 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <RadioGroup
+        android:id="@+id/teamRadioGroup"
+        android:layout_width="213dp"
+        android:layout_height="143dp"
+        android:layout_marginBottom="376dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskBodyEntry"
+        app:layout_constraintVertical_bias="0.11">
+
+        <RadioButton
+            android:id="@+id/Team1RButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Team 1" />
+
+        <RadioButton
+            android:id="@+id/Team2RButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Team 2" />
+
+        <RadioButton
+            android:id="@+id/Team3RButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Team 3" />
+    </RadioGroup>
+
     <EditText
         android:id="@+id/usernameEntery"
         android:layout_width="wrap_content"
@@ -18,19 +49,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <Button
-        android:id="@+id/saveButtonFromSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEntery"
-        app:layout_constraintVertical_bias="0.149" />
+        app:layout_constraintVertical_bias="0.17" />
 
     <TextView
         android:id="@+id/UserNameView"
@@ -42,7 +61,19 @@
         app:layout_constraintHorizontal_bias="0.321"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintVertical_bias="0.969" />
+
+    <Button
+        android:id="@+id/saveButtonFromSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEntery"
+        app:layout_constraintVertical_bias="0.489" />
 
     <Button
         android:id="@+id/backButton"
@@ -54,6 +85,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButtonFromSettings"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.518" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

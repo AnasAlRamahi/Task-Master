@@ -1,44 +1,52 @@
 {
-  "api": {
-    "amplifyDatasource": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "This application is for the elite only, please be careful before using it, or else...."
+    "api": {
+        "amplifyDatasource": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 365,
+                            "description": "This application is for the elite only, please be careful before using it, or else...."
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+    },
+    "auth": {
+        "myapplication7581e3c3": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false,
+            "frontendAuthConfig": {
+                "loginMechanisms": [
+                    "EMAIL"
+                ],
+                "signupAttributes": [
+                    "EMAIL"
+                ],
+                "passwordProtectionSettings": {
+                    "passwordPolicyMinLength": 8,
+                    "passwordPolicyCharacters": []
+                },
+                "mfaConfiguration": "OFF",
+                "mfaTypes": [
+                    "SMS"
+                ]
+            }
+        }
+    },
+    "notifications": {
+        "MyApplicationAqSpq": {
+            "service": "Pinpoint",
+            "channels": [
+                "FCM"
+            ]
+        }
     }
-  },
-  "auth": {
-    "myapplication7581e3c3": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "loginMechanisms": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ]
-      }
-    }
-  }
 }
