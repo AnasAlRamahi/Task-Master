@@ -11,7 +11,13 @@
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".TaskDetailPage"></activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".AddTasks" />
+        <activity android:name=".AddTasks" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".AllTasks" />
         <activity
             android:name=".MainActivity"

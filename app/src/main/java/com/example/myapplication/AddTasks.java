@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,43 +26,60 @@ import java.util.List;
 public class AddTasks extends AppCompatActivity {
     HashMap<String, Team> teams = new HashMap<>();
 
+    void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            TextView description = findViewById(R.id.taskBodyEntry);
+            description.setText(sharedText);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
 
-        Button backToMain = findViewById(R.id.backToMainButton);
-        backToMain.setOnClickListener(view -> {
-            Intent toAddTask = new Intent(AddTasks.this, MainActivity.class);
-            startActivity(toAddTask);
-        });
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+            }
 
-        Amplify.API.query(
-                ModelQuery.list(Team.class),
-                response -> {
-                    for (Team team : response.getData()) {
-                        Log.i("MyAmplifyApp", team.getName());
-                        teams.put(team.getName(), team);
-                    }
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
 
-        Button addTaskButton = findViewById(R.id.submitTask);
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            Button backToMain = findViewById(R.id.backToMainButton);
+            backToMain.setOnClickListener(view -> {
+                Intent toAddTask = new Intent(AddTasks.this, MainActivity.class);
+                startActivity(toAddTask);
+            });
+
+            Amplify.API.query(
+                    ModelQuery.list(Team.class),
+                    response -> {
+                        for (Team team : response.getData()) {
+                            Log.i("MyAmplifyApp", team.getName());
+                            teams.put(team.getName(), team);
+                        }
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+            );
+
+            Button addTaskButton = findViewById(R.id.submitTask);
+            addTaskButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 //                TaskDatabase db = Room.databaseBuilder(getApplicationContext(), TaskDatabase.class, "TaskDB").allowMainThreadQueries().build();
 //                TaskDao taskDao = db.taskDao();
 
-                TextView taskTitle = findViewById(R.id.taskTitleEntry);
-                String title = taskTitle.getText().toString();
-                TextView taskBody = findViewById(R.id.taskBodyEntry);
-                String body = taskBody.getText().toString();
-                RadioGroup rGroup = findViewById(R.id.teamRadioGroup);
-                int id = rGroup.getCheckedRadioButtonId();
-                RadioButton rButton = findViewById(id);
-                String rButtonContent = rButton.getText().toString();
+                    TextView taskTitle = findViewById(R.id.taskTitleEntry);
+                    String title = taskTitle.getText().toString();
+                    TextView taskBody = findViewById(R.id.taskBodyEntry);
+                    String body = taskBody.getText().toString();
+                    RadioGroup rGroup = findViewById(R.id.teamRadioGroup);
+                    int id = rGroup.getCheckedRadioButtonId();
+                    RadioButton rButton = findViewById(id);
+                    String rButtonContent = rButton.getText().toString();
 
 //                TextView taskState = findViewById(R.id.taskStateEntry);
 //                String state = taskState.getText().toString();
@@ -72,30 +90,30 @@ public class AddTasks extends AppCompatActivity {
 //                        .build();
 
 
-
 //                Amplify.API.mutate(ModelMutation.create(team),
 //                        response -> Log.i("MyAmplifyApp", "Team with id: " + response.getData().getId()),
 //                        error -> Log.e("MyAmplifyApp", "Create failed", error)
 //                );
 
-                com.amplifyframework.datastore.generated.model.Task todo = com.amplifyframework.datastore.generated.model.Task.builder()
-                        .title(title)
-                        .description(body)
-                        .status("new")
-                        .team(teams.get(rButtonContent))
-                        .build();
+                    com.amplifyframework.datastore.generated.model.Task todo = com.amplifyframework.datastore.generated.model.Task.builder()
+                            .title(title)
+                            .description(body)
+                            .status("new")
+                            .team(teams.get(rButtonContent))
+                            .build();
 
-                Amplify.API.mutate(ModelMutation.create(todo),
-                        response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
-                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-                );
+                    Amplify.API.mutate(ModelMutation.create(todo),
+                            response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+                            error -> Log.e("MyAmplifyApp", "Create failed", error)
+                    );
 
-                Intent goToMain = new Intent(AddTasks.this, MainActivity.class);
-                startActivity(goToMain);
+                    Intent goToMain = new Intent(AddTasks.this, MainActivity.class);
+                    startActivity(goToMain);
 
-                Toast.makeText(getApplicationContext(), "Submitted", Toast.LENGTH_LONG).show();
-            }
-        });
+                    Toast.makeText(getApplicationContext(), "Submitted", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override
@@ -109,4 +127,6 @@ public class AddTasks extends AppCompatActivity {
         count.setText("Total Tasks: " + taskDao.getAll().size());
 
     }
+
 }
+
